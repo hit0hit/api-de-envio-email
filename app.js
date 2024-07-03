@@ -3,11 +3,28 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const allowedOrigins = [
+  'https://crm.okcells.com.br',
+  'https://okcells.com.br',
+  'https://apxmain.okcells.com.br'
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST'],
+};
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: '50mb' }));
 
 app.post('/', async (req, res) => {
