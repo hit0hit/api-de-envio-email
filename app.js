@@ -3,10 +3,16 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const app = express();
+
 const allowedOrigins = [
   'https://crm.okcells.com.br',
   'https://okcells.com.br',
-  'https://apxmain.okcells.com.br'
+  'http://154.12.226.230:8080',
+  'https://154.12.226.230:8080',
+  'https://apxmain.okcells.com.br',
+  'http://134.65.250.88:8080',
+  'https://134.65.250.88:8080'
 ];
 
 const corsOptions = {
@@ -18,14 +24,15 @@ const corsOptions = {
     }
   },
   methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-require("dotenv").config();
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: '50mb' }));
+
+require("dotenv").config();
+const PORT = process.env.PORT || 3000;
+
 
 app.post('/', async (req, res) => {
   try {
