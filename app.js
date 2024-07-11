@@ -1,16 +1,16 @@
 const nodemailer = require('nodemailer');
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
 
-const corsOptions = {
-    origin: 'https://apxmain.okcells.com.br',
-    methods: ['GET', 'POST']
-  };
+// const corsOptions = {
+    // origin: 'https://apxmain.okcells.com.br',
+    // methods: ['GET', 'POST']
+  // };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: '50mb' }));
 
 require("dotenv").config();
